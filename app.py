@@ -573,6 +573,7 @@ if ask and query.strip():
     })
 
 # ── DISPLAY ANSWER ───────────────────────────────────────────
+i# ── DISPLAY ANSWER ───────────────────────────────────────────
 if st.session_state.history:
     latest = st.session_state.history[-1]
     r      = latest["result"]
@@ -581,61 +582,65 @@ if st.session_state.history:
     badge_map = {
         "HIGH":   ("badge-high","● HIGH CONFIDENCE",
                    "Strong semantic match · Answer is reliable"),
-        "MEDIUM": ("badge-med", "● MEDIUM CONFIDENCE",
+        "MEDIUM": ("badge-med","● MEDIUM CONFIDENCE",
                    "Related context found · Verify numerical data"),
-        "LOW":    ("badge-low", "● LOW CONFIDENCE — FALLBACK",
+        "LOW":    ("badge-low","● LOW CONFIDENCE — FALLBACK",
                    "Insufficient context · LLM call skipped · No hallucination risk"),
     }
     badge_css, badge_label, badge_desc = badge_map[conf]
     sim_clean = round(r["similarity"], 3)
+    ans = r["answer"].replace("<","&lt;").replace(">","&gt;")
 
-    source_block = ""
+    st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
+
+    # Card wrapper open
+    st.markdown("<div class='answer-card'>", unsafe_allow_html=True)
+
+    # Badge + desc
+    st.markdown(
+        f"<span class='conf-badge {badge_css}'>{badge_label}</span>"
+        f"<div style='font-size:0.75rem;color:#2D4A6A;"
+        f"margin-bottom:20px;'>{badge_desc}</div>",
+        unsafe_allow_html=True
+    )
+
+    # Answer
+    st.markdown(
+        f"<div class='answer-label'>Response</div>"
+        f"<div class='answer-text'>{ans}</div>",
+        unsafe_allow_html=True
+    )
+
+    # Source
     if r["source"] not in ["No relevant section found.",
                             "See document context."]:
         src = r["source"].replace("<","&lt;").replace(">","&gt;")
-        source_block = f"""
-        <div class='source-card'>
-            <div class='source-label'>📎 SOURCE CITATION</div>
-            <div class='source-text'>{src}</div>
-        </div>"""
+        st.markdown(
+            f"<div class='source-card'>"
+            f"<div class='source-label'>📎 SOURCE CITATION</div>"
+            f"<div class='source-text'>{src}</div>"
+            f"</div>",
+            unsafe_allow_html=True
+        )
 
-    ans = r["answer"].replace("<","&lt;").replace(">","&gt;")
+    # Divider
+    st.markdown(
+        "<div style='border-top:1px solid #111D2E;"
+        "margin-top:20px;padding-top:16px;'></div>",
+        unsafe_allow_html=True
+    )
 
-    st.markdown(f"""
-    <div class='answer-card'>
-        <span class='conf-badge {badge_css}'>{badge_label}</span>
-        <div style='font-size:0.75rem;color:#2D4A6A;
-                    margin-bottom:20px;font-family:"DM Sans",sans-serif;'>
-            {badge_desc}
-        </div>
-        <div class='answer-label'>Response</div>
-        <div class='answer-text'>{ans}</div>
-        {source_block}
-        <div class='meta-row'>
-            <div class='meta-item'>
-                <span class='meta-label'>Confidence</span>
-                <span class='meta-value'>{conf}</span>
-            </div>
-            <div class='meta-item'>
-                <span class='meta-label'>Similarity</span>
-                <span class='meta-value'>{sim_clean}</span>
-            </div>
-            <div class='meta-item'>
-                <span class='meta-label'>Chunks</span>
-                <span class='meta-value'>{r['chunks_used']}</span>
-            </div>
-            <div class='meta-item'>
-                <span class='meta-label'>Tokens</span>
-                <span class='meta-value'>{r['tokens_used']}</span>
-            </div>
-            <div class='meta-item'>
-                <span class='meta-label'>Latency</span>
-                <span class='meta-value'>{latest['elapsed']}s</span>
-            </div>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+    # Meta row using Streamlit columns (most reliable)
+    m1, m2, m3, m4, m5 = st.columns(5)
+    m1.metric("Confidence",  conf)
+    m2.metric("Similarity",  str(sim_clean))
+    m3.metric("Chunks",      str(r["chunks_used"]))
+    m4.metric("Tokens",      str(r["tokens_used"]))
+    m5.metric("Latency",     f"{latest['elapsed']}s")
 
+    # Card wrapper close
+    st.markdown("</div>", unsafe_allow_html=True)
+    
 # ── HISTORY ──────────────────────────────────────────────────
 if len(st.session_state.history) > 1:
     st.markdown("""
