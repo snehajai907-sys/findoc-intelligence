@@ -1,7 +1,3 @@
-# ============================================================
-# FINDOC INTELLIGENCE — Redesigned UI v2
-# ============================================================
-
 import streamlit as st
 import tempfile, os, time
 from dotenv import load_dotenv
@@ -16,360 +12,525 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 
-html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
-.block-container { padding: 2rem 2.5rem 2rem 2.5rem; max-width: 1100px; }
+/* ── GLOBAL ── */
+html, body, [class*="css"] {
+    font-family: 'DM Sans', sans-serif;
+    background: #080C14;
+}
+.block-container {
+    padding: 2rem 3rem;
+    max-width: 1080px;
+    background: #080C14;
+}
+.main { background: #080C14; }
 
 /* ── SIDEBAR ── */
 [data-testid="stSidebar"] {
-    background: #0F172A;
-    border-right: 1px solid #1E293B;
+    background: #0A0E1A !important;
+    border-right: 1px solid #1A2438;
 }
-[data-testid="stSidebar"] * { color: #CBD5E1 !important; }
-[data-testid="stSidebar"] h1,
-[data-testid="stSidebar"] h2,
-[data-testid="stSidebar"] h3,
-[data-testid="stSidebar"] strong { color: #F1F5F9 !important; }
-[data-testid="stSidebar"] .stSelectbox label { color: #94A3B8 !important; }
-
-/* ── HEADER ── */
-.app-header {
-    display: flex; align-items: center; gap: 14px;
-    margin-bottom: 4px;
+[data-testid="stSidebar"] * { color: #8899AA !important; }
+[data-testid="stSidebar"] .stButton > button {
+    background: #131D2E !important;
+    border: 1px solid #1E2D4A !important;
+    color: #94A3B8 !important;
+    border-radius: 8px !important;
+    font-size: 0.78rem !important;
+    padding: 6px 12px !important;
+    box-shadow: none !important;
 }
-.app-icon {
-    width: 44px; height: 44px; background: #2563EB;
-    border-radius: 10px; display: flex; align-items: center;
-    justify-content: center; font-size: 22px;
-    box-shadow: 0 4px 12px rgba(37,99,235,0.3);
-}
-.app-title { font-size: 1.75rem; font-weight: 700; color: #0F172A; }
-.app-subtitle { font-size: 0.88rem; color: #64748B; margin-bottom: 1.5rem; }
 
 /* ── UPLOAD ZONE ── */
-.upload-zone {
-    border: 2px dashed #CBD5E1; border-radius: 12px;
-    padding: 2.5rem; text-align: center;
-    background: #F8FAFC; margin-bottom: 1.5rem;
-    transition: all 0.2s;
+[data-testid="stFileUploader"] {
+    background: #0D1421;
+    border: 1.5px dashed #1E3A5F;
+    border-radius: 16px;
+    padding: 8px;
+    transition: all 0.3s;
 }
-.upload-zone:hover { border-color: #2563EB; background: #EFF6FF; }
-
-/* ── SUGGESTION PILLS ── */
-.pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
-.pill {
-    background: #EFF6FF; color: #2563EB; border: 1px solid #BFDBFE;
-    padding: 6px 14px; border-radius: 20px; font-size: 0.82rem;
-    font-weight: 500; cursor: pointer; transition: all 0.2s;
+[data-testid="stFileUploader"]:hover {
+    border-color: #3B82F6;
+    background: #0F1E35;
 }
-.pill:hover { background: #2563EB; color: white; }
+[data-testid="stFileUploader"] * { color: #64748B !important; }
+[data-testid="stFileUploader"] button {
+    background: #1E3A5F !important;
+    color: #93C5FD !important;
+    border: none !important;
+    border-radius: 8px !important;
+}
 
-/* ── INPUT ── */
+/* ── INPUTS ── */
 .stTextInput input {
-    border: 1.5px solid #E2E8F0 !important;
-    border-radius: 10px !important;
-    padding: 12px 16px !important;
+    background: #0D1421 !important;
+    border: 1.5px solid #1E2D4A !important;
+    border-radius: 12px !important;
+    color: #E2E8F0 !important;
+    font-family: 'DM Sans', sans-serif !important;
     font-size: 0.95rem !important;
-    background: #FAFAFA !important;
-    transition: all 0.2s !important;
+    padding: 14px 18px !important;
+    caret-color: #3B82F6;
 }
 .stTextInput input:focus {
-    border-color: #2563EB !important;
-    background: white !important;
-    box-shadow: 0 0 0 3px rgba(37,99,235,0.12) !important;
+    border-color: #3B82F6 !important;
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.15) !important;
+}
+.stTextInput input::placeholder { color: #2D3D52 !important; }
+.stTextInput label { color: #4A5568 !important; }
+
+/* ── BUTTONS ── */
+.stButton > button {
+    background: linear-gradient(135deg, #2563EB, #1D4ED8) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 10px !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 0.88rem !important;
+    padding: 10px 20px !important;
+    box-shadow: 0 4px 16px rgba(37,99,235,0.35) !important;
+    transition: all 0.2s !important;
+    letter-spacing: 0.02em !important;
+}
+.stButton > button:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 8px 24px rgba(37,99,235,0.45) !important;
 }
 
-/* ── ANSWER CARD ── */
+/* ── EXPANDER ── */
+[data-testid="stExpander"] {
+    background: #0D1421 !important;
+    border: 1px solid #1E2D4A !important;
+    border-radius: 10px !important;
+}
+[data-testid="stExpander"] summary { color: #64748B !important; }
+[data-testid="stExpander"] p,
+[data-testid="stExpander"] td,
+[data-testid="stExpander"] th { color: #64748B !important; }
+
+/* ── SPINNER ── */
+[data-testid="stSpinner"] * { color: #3B82F6 !important; }
+
+/* ── SUCCESS/ERROR ── */
+[data-testid="stAlert"] { border-radius: 10px !important; }
+
+/* ── CARDS ── */
+.hero-banner {
+    background: linear-gradient(135deg, #0D1B35 0%, #0A1628 50%, #06101E 100%);
+    border: 1px solid #1E3A5F;
+    border-radius: 20px;
+    padding: 36px 40px;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+}
+.hero-banner::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+}
+.hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #F1F5F9;
+    margin: 0;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+.hero-title span { color: #3B82F6; }
+.hero-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: #4A6080;
+    margin-top: 10px;
+    line-height: 1.6;
+}
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(59,130,246,0.1);
+    border: 1px solid rgba(59,130,246,0.2);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #60A5FA;
+    letter-spacing: 0.04em;
+    margin-bottom: 16px;
+}
+.section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 500;
+    color: #2D4A6A;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
 .answer-card {
-    background: white;
-    border: 1px solid #E2E8F0;
-    border-radius: 14px;
-    padding: 24px;
+    background: linear-gradient(145deg, #0D1827, #0A1220);
+    border: 1px solid #1E3050;
+    border-radius: 16px;
+    padding: 28px;
     margin-top: 20px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4), 
+                inset 0 1px 0 rgba(255,255,255,0.03);
 }
 .conf-badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 5px 14px; border-radius: 20px;
-    font-size: 0.78rem; font-weight: 600;
-    letter-spacing: 0.04em; margin-bottom: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 20px;
 }
-.badge-high { background:#DCFCE7; color:#15803D; border:1px solid #86EFAC; }
-.badge-med  { background:#FEF9C3; color:#A16207; border:1px solid #FDE047; }
-.badge-low  { background:#FEE2E2; color:#B91C1C; border:1px solid #FCA5A5; }
-
+.badge-high {
+    background: rgba(16,185,129,0.1);
+    border: 1px solid rgba(16,185,129,0.25);
+    color: #34D399;
+}
+.badge-med {
+    background: rgba(245,158,11,0.1);
+    border: 1px solid rgba(245,158,11,0.25);
+    color: #FBBF24;
+}
+.badge-low {
+    background: rgba(239,68,68,0.1);
+    border: 1px solid rgba(239,68,68,0.25);
+    color: #F87171;
+}
 .answer-label {
-    font-size: 0.72rem; font-weight: 600; color: #94A3B8;
-    letter-spacing: 0.08em; text-transform: uppercase;
-    margin-bottom: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: #2D4A6A;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
 }
 .answer-text {
-    font-size: 1.02rem; color: #1E293B; line-height: 1.7;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.05rem;
+    color: #CBD5E1;
+    line-height: 1.75;
     font-weight: 400;
 }
 .source-card {
-    background: #F0F9FF; border: 1px solid #BAE6FD;
+    background: rgba(14,165,233,0.05);
+    border: 1px solid rgba(14,165,233,0.15);
     border-left: 3px solid #0EA5E9;
-    border-radius: 8px; padding: 12px 16px;
-    margin-top: 16px;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-top: 20px;
 }
 .source-label {
-    font-size: 0.7rem; font-weight: 600; color: #0369A1;
-    letter-spacing: 0.06em; margin-bottom: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    font-weight: 500;
+    color: #0EA5E9;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
 }
-.source-text { font-size: 0.88rem; color: #0C4A6E; line-height: 1.5; }
-
-/* ── META ROW ── */
+.source-text {
+    font-size: 0.85rem;
+    color: #7DD3FC;
+    line-height: 1.6;
+    font-style: italic;
+}
 .meta-row {
-    display: flex; gap: 20px; margin-top: 16px;
-    padding-top: 14px; border-top: 1px solid #F1F5F9;
+    display: flex;
+    gap: 0;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid #111D2E;
     flex-wrap: wrap;
 }
-.meta-item { display: flex; flex-direction: column; }
-.meta-label { font-size: 0.68rem; color: #94A3B8; font-weight: 500; }
-.meta-value { font-size: 0.88rem; color: #475569; font-weight: 600; }
-
-/* ── HISTORY ── */
-.history-item {
-    border: 1px solid #F1F5F9; border-radius: 10px;
-    padding: 14px 16px; margin-bottom: 10px;
-    background: #FAFAFA;
+.meta-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0 16px;
+    border-right: 1px solid #111D2E;
+    min-width: 80px;
 }
-.history-q { font-size: 0.88rem; font-weight: 600; color: #1E293B; }
-.history-a { font-size: 0.83rem; color: #64748B; margin-top: 4px; }
-
-/* ── STAT PILLS ── */
-.stat-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
-.stat-pill {
-    background: #1E293B; color: #94A3B8;
-    padding: 5px 12px; border-radius: 8px;
-    font-size: 0.75rem; font-weight: 500;
+.meta-item:first-child { padding-left: 0; }
+.meta-item:last-child { border-right: none; }
+.meta-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: #2D4A6A;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
 }
-.stat-pill span { color: #F1F5F9; font-weight: 700; }
-
-/* ── EMPTY STATE ── */
-.empty-state {
-    text-align: center; padding: 3rem 2rem;
-    border: 1.5px dashed #E2E8F0; border-radius: 16px;
-    margin-top: 2rem; background: #FAFAFA;
+.meta-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.88rem;
+    color: #60A5FA;
+    font-weight: 500;
 }
-.empty-icon { font-size: 3rem; margin-bottom: 1rem; }
-.empty-title { font-size: 1.1rem; font-weight: 600;
-               color: #1E293B; margin-bottom: 6px; }
-.empty-sub { font-size: 0.88rem; color: #94A3B8; }
-
-/* ── HOW IT WORKS ── */
-.step-row { display: flex; gap: 12px; margin-top: 1.5rem; }
+.stat-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #0D1827;
+    border: 1px solid #1E3050;
+    border-radius: 8px;
+    padding: 5px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: #4A7FA5;
+    margin: 3px;
+}
+.stat-chip strong { color: #60A5FA; font-weight: 600; }
+.step-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 12px;
+    margin-top: 20px;
+}
 .step-card {
-    flex: 1; background: white; border: 1px solid #E2E8F0;
-    border-radius: 12px; padding: 16px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    background: #0D1421;
+    border: 1px solid #1A2438;
+    border-radius: 12px;
+    padding: 18px;
+    transition: border-color 0.2s;
 }
+.step-card:hover { border-color: #3B82F6; }
 .step-num {
-    width: 28px; height: 28px; background: #2563EB;
-    border-radius: 8px; color: white; font-size: 0.8rem;
-    font-weight: 700; display: flex; align-items: center;
-    justify-content: center; margin-bottom: 10px;
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #1E3A5F;
+    line-height: 1;
+    margin-bottom: 10px;
 }
-.step-title { font-size: 0.88rem; font-weight: 600; color: #1E293B; }
-.step-desc { font-size: 0.78rem; color: #94A3B8; margin-top: 4px; }
-
-/* ── BUTTON ── */
-.stButton > button {
-    background: #2563EB !important; color: white !important;
-    border: none !important; border-radius: 10px !important;
-    padding: 10px 24px !important; font-weight: 600 !important;
-    font-size: 0.9rem !important;
-    box-shadow: 0 4px 12px rgba(37,99,235,0.3) !important;
-    transition: all 0.2s !important;
+.step-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #CBD5E1;
+    margin-bottom: 4px;
 }
-.stButton > button:hover {
-    background: #1D4ED8 !important;
-    box-shadow: 0 6px 16px rgba(37,99,235,0.4) !important;
-    transform: translateY(-1px) !important;
+.step-desc { font-size: 0.75rem; color: #334155; line-height: 1.4; }
+.history-item {
+    background: #0A0F1A;
+    border: 1px solid #131D2E;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 8px;
+    transition: border-color 0.2s;
 }
-div[data-testid="stFileUploader"] {
-    background: transparent !important;
+.history-item:hover { border-color: #1E3050; }
+.history-q {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #94A3B8;
+}
+.history-a { font-size: 0.78rem; color: #334155; margin-top: 5px; }
+.upload-hero {
+    background: linear-gradient(135deg, #0A1628 0%, #080C14 100%);
+    border: 1.5px dashed #1E3A5F;
+    border-radius: 20px;
+    padding: 48px 32px;
+    text-align: center;
+    margin-bottom: 28px;
+    transition: all 0.3s;
+}
+.upload-hero:hover {
+    border-color: #3B82F6;
+    background: linear-gradient(135deg, #0D1E38 0%, #0A1020 100%);
 }
 </style>
 """, unsafe_allow_html=True)
 
 # ── SESSION STATE ────────────────────────────────────────────
-for key, default in [
-    ("history", []),
-    ("collection", None),
-    ("doc_stats", {}),
-    ("total_tokens", 0),
-    ("query_input", ""),
-]:
+for key, val in [("history",[]),("collection",None),
+                 ("doc_stats",{}),("total_tokens",0),
+                 ("query_input","")]:
     if key not in st.session_state:
-        st.session_state[key] = default
+        st.session_state[key] = val
 
 # ── SIDEBAR ─────────────────────────────────────────────────
 with st.sidebar:
     st.markdown("""
-    <div style='padding: 8px 0 20px 0;'>
-        <div style='font-size:1.1rem; font-weight:700;
-                    color:#F1F5F9; margin-bottom:4px;'>
-            📄 FinDoc Intelligence
+    <div style='padding:16px 0 24px 0;'>
+        <div style='font-family:"Syne",sans-serif;font-size:1rem;
+                    font-weight:700;color:#60A5FA;letter-spacing:0.02em;'>
+            FinDoc
         </div>
-        <div style='font-size:0.78rem; color:#64748B;'>
-            AI-powered financial document Q&A
+        <div style='font-size:0.7rem;color:#1E3050;margin-top:2px;
+                    font-family:"JetBrains Mono",monospace;'>
+            INTELLIGENCE v2.0
         </div>
+    </div>
+    <div style='font-family:"JetBrains Mono",monospace;font-size:0.65rem;
+                color:#1E3050;letter-spacing:0.1em;margin-bottom:10px;'>
+        DOCUMENT
     </div>
     """, unsafe_allow_html=True)
 
     uploaded = st.file_uploader(
-        "Upload Document",
-        type=["pdf", "txt"],
-        label_visibility="collapsed",
-        help="Upload any financial PDF or TXT document"
+        "Upload", type=["pdf","txt"],
+        label_visibility="collapsed"
     )
 
     if uploaded:
-        with st.spinner("Indexing document..."):
+        with st.spinner("Processing..."):
             suffix = ".pdf" if uploaded.name.endswith(".pdf") else ".txt"
             tmp = tempfile.NamedTemporaryFile(delete=False, suffix=suffix)
-            tmp.write(uploaded.read())
-            tmp.flush(); tmp.close()
-
+            tmp.write(uploaded.read()); tmp.flush(); tmp.close()
             from rag_pipeline import load_document, chunk_text, build_vector_store
             text   = load_document(tmp.name)
             chunks = chunk_text(text)
             col    = build_vector_store(chunks, uploaded.name)
-
             st.session_state.collection   = col
             st.session_state.doc_stats    = {
-                "name": uploaded.name,
-                "words": len(text.split()),
-                "chunks": len(chunks)
+                "name":uploaded.name,
+                "words":len(text.split()),
+                "chunks":len(chunks)
             }
             st.session_state.history      = []
             st.session_state.total_tokens = 0
+        st.success("Document indexed ✓")
 
-        st.success("Ready to answer questions")
-
-    # Doc stats
     if st.session_state.doc_stats:
         ds = st.session_state.doc_stats
+        name = ds['name'][:24] + "..." if len(ds['name']) > 24 else ds['name']
         st.markdown(f"""
-        <div style='margin-top:16px;'>
-            <div style='font-size:0.7rem; color:#475569;
-                        font-weight:600; letter-spacing:0.06em;
-                        margin-bottom:10px;'>DOCUMENT LOADED</div>
-            <div style='font-size:0.82rem; color:#CBD5E1;
-                        margin-bottom:12px; word-break:break-all;'>
-                📄 {ds['name']}
+        <div style='margin-top:20px;padding:16px;background:#0D1421;
+                    border:1px solid #1A2438;border-radius:12px;'>
+            <div style='font-size:0.75rem;color:#60A5FA;font-weight:600;
+                        margin-bottom:12px;'>📄 {name}</div>
+            <div>
+                <span class='stat-chip'><strong>{ds['words']:,}</strong> words</span>
+                <span class='stat-chip'><strong>{ds['chunks']}</strong> chunks</span>
+                <span class='stat-chip'>
+                    <strong>{st.session_state.total_tokens:,}</strong> tokens used
+                </span>
             </div>
-            <div class='stat-row'>
-                <div class='stat-pill'><span>{ds['words']:,}</span> words</div>
-                <div class='stat-pill'><span>{ds['chunks']}</span> chunks</div>
-                <div class='stat-pill'><span>{st.session_state.total_tokens:,}</span> tokens</div>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+        </div>""", unsafe_allow_html=True)
 
-    st.markdown("<div style='margin-top:24px;'>", unsafe_allow_html=True)
-    with st.expander("⚙️ System Config"):
+    st.markdown("<div style='margin-top:20px;'></div>",
+                unsafe_allow_html=True)
+
+    with st.expander("⚙️ Config"):
         st.markdown("""
-        | Setting | Value |
-        |---|---|
-        | Model | Llama 3.3 70B |
-        | Chunk size | 400 words |
-        | Overlap | 40 words |
-        | Retrieval | Top-3 chunks |
-        | Embeddings | all-MiniLM-L6-v2 |
-        | Confidence | Cosine distance |
+model   : llama-3.3-70b
+    chunks  : 400 words
+    overlap : 40 words
+    top-k   : 3
+    embed   : MiniLM-L6-v2
+                    """)
+
+    with st.expander("🚦 Confidence"):
+        st.markdown("""
+        🟢 **HIGH** · Strong match
+
+        🟡 **MEDIUM** · Related content
+
+        🔴 **LOW** · No context · LLM skipped
         """)
 
-    with st.expander("🚦 Confidence Tiers"):
-        st.markdown("""
-        🟢 **HIGH** — Strong match. Answer reliable.
+    st.markdown("""
+    <div style='position:fixed;bottom:16px;left:0;width:250px;
+                padding:0 16px;font-size:0.65rem;color:#1E3050;
+                font-family:"JetBrains Mono",monospace;'>
+        Built by Sneha Jaiswal · AI PM
+    </div>""", unsafe_allow_html=True)
 
-        🟡 **MEDIUM** — Related content found.
-        Verify key numbers independently.
-
-        🔴 **LOW** — No sufficient context found.
-        LLM call skipped. Zero hallucination risk.
-        """)
-
-    st.markdown(f"""
-    <div style='position:fixed; bottom:20px; left:0; width:260px;
-                padding:0 16px; font-size:0.7rem; color:#334155;'>
-        FinDoc Intelligence v2.0 · Built by Sneha Jaiswal
-    </div>
-    """, unsafe_allow_html=True)
-
-# ── HEADER ──────────────────────────────────────────────────
+# ── HERO BANNER ─────────────────────────────────────────────
 st.markdown("""
-<div class='app-header'>
-    <div class='app-icon'>📄</div>
-    <div class='app-title'>FinDoc Intelligence</div>
-</div>
-<div class='app-subtitle'>
-    Upload any financial document · Ask anything ·
-    Get grounded, cited answers with confidence scores
+<div class='hero-banner'>
+    <div class='hero-badge'>⚡ RAG-POWERED · LLM EVALUATED</div>
+    <div class='hero-title'>
+        FinDoc <span>Intelligence</span>
+    </div>
+    <div class='hero-sub'>
+        Upload any financial document · Get grounded, cited answers
+        with confidence scoring · Zero hallucinations guaranteed
+    </div>
 </div>
 """, unsafe_allow_html=True)
 
-# ── NO DOCUMENT STATE ────────────────────────────────────────
+# ── NO DOC STATE ─────────────────────────────────────────────
 if not st.session_state.collection:
     st.markdown("""
-    <div class='empty-state'>
-        <div class='empty-icon'>📂</div>
-        <div class='empty-title'>No document loaded yet</div>
-        <div class='empty-sub'>
-            Upload a PDF or TXT file from the sidebar to begin
+    <div class='upload-hero'>
+        <div style='font-size:3rem;margin-bottom:16px;'>📂</div>
+        <div style='font-family:"Syne",sans-serif;font-size:1.3rem;
+                    font-weight:700;color:#CBD5E1;margin-bottom:8px;'>
+            No document loaded
+        </div>
+        <div style='font-size:0.85rem;color:#2D4A6A;margin-bottom:24px;'>
+            Upload a PDF or TXT from the sidebar to begin analysis
+        </div>
+        <div style='display:flex;gap:10px;justify-content:center;flex-wrap:wrap;'>
+            <span style='background:#0D1827;border:1px solid #1E3050;
+                         padding:6px 14px;border-radius:8px;
+                         font-size:0.75rem;color:#3B82F6;
+                         font-family:"JetBrains Mono",monospace;'>
+                Annual Reports
+            </span>
+            <span style='background:#0D1827;border:1px solid #1E3050;
+                         padding:6px 14px;border-radius:8px;
+                         font-size:0.75rem;color:#3B82F6;
+                         font-family:"JetBrains Mono",monospace;'>
+                Earnings Releases
+            </span>
+            <span style='background:#0D1827;border:1px solid #1E3050;
+                         padding:6px 14px;border-radius:8px;
+                         font-size:0.75rem;color:#3B82F6;
+                         font-family:"JetBrains Mono",monospace;'>
+                Loan Agreements
+            </span>
+            <span style='background:#0D1827;border:1px solid #1E3050;
+                         padding:6px 14px;border-radius:8px;
+                         font-size:0.75rem;color:#3B82F6;
+                         font-family:"JetBrains Mono",monospace;'>
+                SEC Filings
+            </span>
         </div>
     </div>
-
-    <div class='step-row' style='margin-top:24px;'>
+    <div class='step-grid'>
         <div class='step-card'>
-            <div class='step-num'>1</div>
-            <div class='step-title'>Upload Document</div>
+            <div class='step-num'>01</div>
+            <div class='step-title'>Upload</div>
             <div class='step-desc'>PDF or TXT · Any financial document</div>
         </div>
         <div class='step-card'>
-            <div class='step-num'>2</div>
-            <div class='step-title'>Auto-Indexed</div>
-            <div class='step-desc'>Chunked, embedded and ready instantly</div>
+            <div class='step-num'>02</div>
+            <div class='step-title'>Index</div>
+            <div class='step-desc'>Auto-chunked and embedded instantly</div>
         </div>
         <div class='step-card'>
-            <div class='step-num'>3</div>
-            <div class='step-title'>Ask Anything</div>
-            <div class='step-desc'>Revenue, margins, debt, outlook</div>
+            <div class='step-num'>03</div>
+            <div class='step-title'>Ask</div>
+            <div class='step-desc'>Revenue, margins, debt, risks</div>
         </div>
         <div class='step-card'>
-            <div class='step-num'>4</div>
-            <div class='step-title'>Grounded Answer</div>
-            <div class='step-desc'>Cited, confidence-scored, no hallucinations</div>
-        </div>
-    </div>
-
-    <div style='margin-top:28px;'>
-        <div style='font-size:0.75rem; font-weight:600; color:#94A3B8;
-                    letter-spacing:0.06em; margin-bottom:12px;'>
-            EXAMPLE QUESTIONS
-        </div>
-        <div class='pill-row'>
-            <span class='pill'>What was the total revenue?</span>
-            <span class='pill'>What is the net income margin?</span>
-            <span class='pill'>What is the debt position?</span>
-            <span class='pill'>What risks did management highlight?</span>
-            <span class='pill'>What is the revenue growth rate?</span>
+            <div class='step-num'>04</div>
+            <div class='step-title'>Answer</div>
+            <div class='step-desc'>Cited, grounded, confidence-scored</div>
         </div>
     </div>
     """, unsafe_allow_html=True)
     st.stop()
 
 # ── Q&A INTERFACE ────────────────────────────────────────────
-st.markdown("""
-<div style='font-size:0.72rem; font-weight:600; color:#94A3B8;
-            letter-spacing:0.08em; margin-bottom:8px;'>
-    SUGGESTED QUESTIONS
-</div>
-""", unsafe_allow_html=True)
+st.markdown("<div class='section-label'>SUGGESTED QUERIES</div>",
+            unsafe_allow_html=True)
 
 suggestions = [
     "What was the total revenue?",
@@ -382,21 +543,23 @@ for col, sug in zip(cols, suggestions):
     if col.button(sug, use_container_width=True):
         st.session_state["query_input"] = sug
 
+st.markdown("<div style='margin-top:12px;'></div>",
+            unsafe_allow_html=True)
+
 query = st.text_input(
-    "question",
-    key="query_input",
+    "q", key="query_input",
     placeholder="Ask anything about this document...",
     label_visibility="collapsed"
 )
 
 btn_col, _ = st.columns([2, 8])
 with btn_col:
-    ask = st.button("🔍  Get Answer", type="primary",
+    ask = st.button("⚡  Analyze", type="primary",
                     use_container_width=True)
 
 # ── PROCESS ─────────────────────────────────────────────────
 if ask and query.strip():
-    with st.spinner("Searching document..."):
+    with st.spinner("Scanning document..."):
         start = time.time()
         from rag_pipeline import retrieve_context, generate_answer
         chunks, distances = retrieve_context(
@@ -404,45 +567,50 @@ if ask and query.strip():
         )
         result  = generate_answer(query, chunks, distances)
         elapsed = round(time.time() - start, 2)
-
     st.session_state.total_tokens += result.get("tokens_used", 0)
     st.session_state.history.append({
-        "query": query, "result": result, "elapsed": elapsed
+        "query":query, "result":result, "elapsed":elapsed
     })
 
-# ── LATEST ANSWER ────────────────────────────────────────────
+# ── DISPLAY ANSWER ───────────────────────────────────────────
 if st.session_state.history:
     latest = st.session_state.history[-1]
     r      = latest["result"]
     conf   = r["confidence"]
 
     badge_map = {
-        "HIGH":   ("badge-high", "🟢  HIGH CONFIDENCE",
-                   "Strong match found — answer is reliable"),
-        "MEDIUM": ("badge-med",  "🟡  MEDIUM CONFIDENCE",
-                   "Related content found — verify key numbers independently"),
-        "LOW":    ("badge-low",  "🔴  LOW CONFIDENCE — FALLBACK",
-                   "Insufficient context · LLM call skipped · Zero hallucination risk"),
+        "HIGH":   ("badge-high","● HIGH CONFIDENCE",
+                   "Strong semantic match · Answer is reliable"),
+        "MEDIUM": ("badge-med", "● MEDIUM CONFIDENCE",
+                   "Related context found · Verify numerical data"),
+        "LOW":    ("badge-low", "● LOW CONFIDENCE — FALLBACK",
+                   "Insufficient context · LLM call skipped · No hallucination risk"),
     }
     badge_css, badge_label, badge_desc = badge_map[conf]
+    sim_clean = round(r["similarity"], 3)
+
+    source_block = ""
+    if r["source"] not in ["No relevant section found.",
+                            "See document context."]:
+        src = r["source"].replace("<","&lt;").replace(">","&gt;")
+        source_block = f"""
+        <div class='source-card'>
+            <div class='source-label'>📎 SOURCE CITATION</div>
+            <div class='source-text'>{src}</div>
+        </div>"""
+
+    ans = r["answer"].replace("<","&lt;").replace(">","&gt;")
 
     st.markdown(f"""
     <div class='answer-card'>
         <span class='conf-badge {badge_css}'>{badge_label}</span>
-        <div style='font-size:0.72rem; color:#94A3B8;
-                    margin-bottom:16px;'>{badge_desc}</div>
-
-        <div class='answer-label'>Answer</div>
-        <div class='answer-text'>{r['answer']}</div>
-
-        {f"""
-        <div class='source-card' style='margin-top:16px;'>
-            <div class='source-label'>📎 Source Citation</div>
-            <div class='source-text'>{r['source']}</div>
+        <div style='font-size:0.75rem;color:#2D4A6A;
+                    margin-bottom:20px;font-family:"DM Sans",sans-serif;'>
+            {badge_desc}
         </div>
-        """ if r['source'] not in ['No relevant section found.',
-                                    'See document context.'] else ""}
-
+        <div class='answer-label'>Response</div>
+        <div class='answer-text'>{ans}</div>
+        {source_block}
         <div class='meta-row'>
             <div class='meta-item'>
                 <span class='meta-label'>Confidence</span>
@@ -450,10 +618,10 @@ if st.session_state.history:
             </div>
             <div class='meta-item'>
                 <span class='meta-label'>Similarity</span>
-                <span class='meta-value'>{r['similarity']}</span>
+                <span class='meta-value'>{sim_clean}</span>
             </div>
             <div class='meta-item'>
-                <span class='meta-label'>Chunks Used</span>
+                <span class='meta-label'>Chunks</span>
                 <span class='meta-value'>{r['chunks_used']}</span>
             </div>
             <div class='meta-item'>
@@ -461,7 +629,7 @@ if st.session_state.history:
                 <span class='meta-value'>{r['tokens_used']}</span>
             </div>
             <div class='meta-item'>
-                <span class='meta-label'>Response Time</span>
+                <span class='meta-label'>Latency</span>
                 <span class='meta-value'>{latest['elapsed']}s</span>
             </div>
         </div>
@@ -471,20 +639,19 @@ if st.session_state.history:
 # ── HISTORY ──────────────────────────────────────────────────
 if len(st.session_state.history) > 1:
     st.markdown("""
-    <div style='font-size:0.72rem; font-weight:600; color:#94A3B8;
-                letter-spacing:0.08em; margin: 28px 0 12px 0;'>
-        CONVERSATION HISTORY
-    </div>
-    """, unsafe_allow_html=True)
+    <div style='margin-top:32px;'>
+    <div class='section-label'>QUERY HISTORY</div>
+    </div>""", unsafe_allow_html=True)
 
-    icons = {"HIGH": "🟢", "MEDIUM": "🟡", "LOW": "🔴"}
+    icons = {"HIGH":"🟢","MEDIUM":"🟡","LOW":"🔴"}
     for item in reversed(st.session_state.history[:-1]):
-        r = item["result"]
+        r   = item["result"]
+        ans = r["answer"][:120].replace(
+            "<","&lt;").replace(">","&gt;")
         st.markdown(f"""
         <div class='history-item'>
             <div class='history-q'>
-                {icons[r['confidence']]} {item['query']}
+                {icons[r['confidence']]} &nbsp; {item['query']}
             </div>
-            <div class='history-a'>{r['answer'][:140]}...</div>
-        </div>
-        """, unsafe_allow_html=True)
+            <div class='history-a'>{ans}...</div>
+        </div>""", unsafe_allow_html=True)
