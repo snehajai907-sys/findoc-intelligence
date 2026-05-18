@@ -8,10 +8,16 @@ import os
 import re
 from groq import Groq
 from pypdf import PdfReader
-import chromadb
-from chromadb.utils.embedding_functions import (
-    SentenceTransformerEmbeddingFunction
-)
+import numpy as np
+from sentence_transformers import SentenceTransformer
+
+_embedder = None
+
+def get_embedder():
+    global _embedder
+    if _embedder is None:
+        _embedder = SentenceTransformer("all-MiniLM-L6-v2")
+    return _embedder
 
 # ─── CONFIGURATION ──────────────────────────────────────────
 # PM Decision Log: Every number here is a deliberate choice
@@ -67,57 +73,45 @@ def chunk_text(text: str) -> list:
 
 
 # ─── VECTOR STORE ───────────────────────────────────────────
-def build_vector_store(chunks: list, doc_name: str):
+def build_vector_store(chunks: list, doc_name: str = "doc") -> dict:
     """
-    Embed chunks and store in ChromaDB.
+    Embed chunks using sentence-transformers and store
+    as numpy arrays for cosine similarity search.
 
-    PM Decision: ChromaDB (local) vs Pinecone (cloud).
-    - Free, zero latency, no API key for prototype
-    - Production path: Pinecone for persistence + scale
+    PM Decision: numpy over ChromaDB for deployment.
+    For small documents (<200 chunks), numpy similarity
+    search is faster than a vector DB round-trip and has
+    zero infrastructure dependencies.
+    Production path: Pinecone or Weaviate for >10K chunks.
     """
-    ef     = SentenceTransformerEmbeddingFunction(
-                 model_name="all-MiniLM-L6-v2"
-             )
-    client = chromadb.Client()
-
-    # Sanitise collection name for ChromaDB rules
-    safe_name = re.sub(r'[^a-zA-Z0-9_-]', '_', doc_name)[:40]
-    safe_name = safe_name.strip('_') or "findoc"
-    if len(safe_name) < 3:
-        safe_name = "doc_" + safe_name
-
-    try:
-        client.delete_collection(safe_name)
-    except Exception:
-        pass
-
-    collection = client.create_collection(
-        name=safe_name,
-        embedding_function=ef,
-        metadata={"hnsw:space": "cosine"}
-    )
-
-    ids = [f"chunk_{i}" for i in range(len(chunks))]
-    collection.add(documents=chunks, ids=ids)
-    return collection
+    embedder   = get_embedder()
+    embeddings = embedder.encode(chunks, show_progress_bar=False)
+    return {"chunks": chunks, "embeddings": embeddings}
 
 
 # ─── RETRIEVAL ──────────────────────────────────────────────
-def retrieve_context(query: str, collection) -> tuple:
+def retrieve_context(query: str, collection: dict) -> tuple:
     """
-    Retrieve top-k most relevant chunks.
-
-    PM Decision: TOP_K = 3
-    - k=1: too narrow, misses complementary context
-    - k=5: dilutes answer, raises token cost per query
-    - k=3: optimal for single-document financial Q&A
+    Cosine similarity search over numpy embeddings.
+    Returns top-k chunks and their distances.
     """
-    n = min(TOP_K, collection.count())
-    results   = collection.query(query_texts=[query], n_results=n)
-    chunks    = results["documents"][0]
-    distances = results["distances"][0]
-    return chunks, distances
+    embedder        = get_embedder()
+    query_embedding = embedder.encode([query])[0]
+    embeddings      = collection["embeddings"]
+    chunks          = collection["chunks"]
 
+    # Cosine similarity
+    norms       = np.linalg.norm(embeddings, axis=1) * \
+                  np.linalg.norm(query_embedding)
+    similarities = np.dot(embeddings, query_embedding) / \
+                  np.where(norms == 0, 1e-9, norms)
+
+    top_k      = min(TOP_K, len(chunks))
+    top_idx    = np.argsort(similarities)[::-1][:top_k]
+    top_chunks = [chunks[i]          for i in top_idx]
+    distances  = [1 - similarities[i] for i in top_idx]
+
+    return top_chunks, distances
 
 # ─── CONFIDENCE SCORING ─────────────────────────────────────
 def score_confidence(distances: list) -> tuple:
