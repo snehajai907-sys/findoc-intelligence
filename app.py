@@ -12,8 +12,8 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
-html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; background: #080C14; }
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Outfit:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+            html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; background: #080C14; }
 .block-container { padding: 2rem 3rem; max-width: 1080px; background: #080C14; }
 .main { background: #080C14; }
 [data-testid="stSidebar"] { background: #0A0E1A !important; border-right: 1px solid #1A2438; }
@@ -70,9 +70,9 @@ html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; background: #08
     font-weight: 600; color: #60A5FA; letter-spacing: 0.04em; margin-bottom: 16px;
 }
 .hero-title {
-    font-family: 'Syne', sans-serif; font-size: 2.2rem;
+    font-family: 'Playfair Display', serif; font-size: 2.6rem;
     font-weight: 800; color: #F1F5F9; margin: 0;
-    line-height: 1.1; letter-spacing: -0.02em;
+    line-height: 1.1; letter-spacing: -0.01em;
 }
 .hero-title span { color: #3B82F6; }
 .hero-sub { font-size: 0.9rem; color: #4A6080; margin-top: 10px; line-height: 1.6; }
