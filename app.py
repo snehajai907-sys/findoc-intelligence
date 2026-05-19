@@ -9,7 +9,74 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+# ── DEMO DOCUMENT ────────────────────────────────────────────
+DEMO_DOC = """
+MERIDIAN CAPITAL GROUP
+ANNUAL REPORT & FINANCIAL SUMMARY — FISCAL YEAR 2023
 
+EXECUTIVE SUMMARY
+Meridian Capital Group delivered a strong fiscal year 2023,
+achieving record revenues of $6.84 billion, representing an
+18.7% year-over-year increase from $5.76 billion in FY2022.
+Net income reached $1.42 billion, up 22.4% year-over-year.
+Net profit margin improved from 20.1% to 20.8%.
+Earnings per share stood at $4.87 vs $3.98 in FY2022.
+The Board approved a quarterly dividend of $0.68 per share,
+totaling $2.72 annually — an 8% increase year-over-year.
+
+REVENUE BY SEGMENT
+Institutional Lending: $3.12 billion (45.6% of revenue), +24.3% YoY.
+Retail Banking Services: $1.98 billion (28.9%), +14.1% YoY.
+Wealth Management: $1.12 billion (16.4%), +11.8% YoY.
+Assets under management reached $48.6 billion.
+Capital Markets: $0.62 billion (9.1%), +8.4% YoY.
+
+OPERATING EXPENSES
+Total operating expenses: $4.89 billion (+16.2% vs FY2022).
+Efficiency ratio improved to 71.5% from 73.1%.
+Personnel costs: $2.14 billion. Technology: $0.82 billion.
+R&D investment: $310 million on AI-driven credit risk tools.
+
+BALANCE SHEET
+Total assets: $94.2 billion. Total liabilities: $81.6 billion.
+Shareholders equity: $12.6 billion.
+Long-term debt: $18.4 billion. Short-term borrowings: $6.2 billion.
+Total debt: $24.6 billion. Cash and equivalents: $8.9 billion.
+Net debt position: $11.4 billion.
+Debt-to-equity ratio: 1.95x (improved from 2.18x in FY2022).
+CET1 capital ratio: 13.4% (above 8.0% regulatory minimum).
+Return on equity: 11.8%. Return on assets: 1.51%.
+
+CREDIT QUALITY
+Non-performing loans ratio: 1.84% (improved from 2.31%).
+Loan loss provisions: $420 million. Net charge-offs: $318 million.
+
+GEOGRAPHIC PERFORMANCE
+North America: $4.28 billion (62.6%). Europe: $1.37 billion (20.0%).
+Asia-Pacific: $0.84 billion (12.3%), fastest growing at +41.2% YoY.
+New operations in Singapore, Hong Kong, and Jakarta in Q1 2023.
+
+RISK FACTORS
+1. Interest Rate Risk: 100bps rate shift reduces NII by ~$180M annually.
+2. Credit Concentration: Top 20 borrowers = 34% of total loan exposure.
+3. Regulatory Risk: Basel IV could require $2.4B additional capital.
+4. Geopolitical Risk: $840M in Asia-Pacific assets at regional risk.
+
+MANAGEMENT OUTLOOK — FY2024
+CEO Jonathan R. Hargrove stated the AI-driven underwriting platform
+processed 68% of retail loan applications in Q4 2023 and will expand
+to institutional lending in H1 2024, reducing credit decision times
+from 14 days to under 72 hours.
+FY2024 guidance: Revenue growth 12-15%, net margin 21.5-22.5%,
+ROE target 13.0%+, capex $680-720 million.
+Acquisition of Pacific Rim Financial Services valued at $2.8 billion
+expected Q2 2024, adding $340M annual revenue from FY2025.
+
+CAPITAL RETURNS
+FY2023 share buybacks: $758.9 million (12.4 million shares at $61.20).
+Remaining buyback authorization: $1.2 billion.
+Total capital returned: $1.55 billion (109% of net income).
+"""
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Outfit:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
@@ -154,7 +221,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ── SESSION STATE ────────────────────────────────────────────
-for key, val in [("history",[]),("collection",None),
+for key, val in [("history",[]),("demo_mode", False),("collection",None),
                  ("doc_stats",{}),("total_tokens",0),
                  ("query_input","")]:
     if key not in st.session_state:
@@ -164,16 +231,54 @@ for key, val in [("history",[]),("collection",None),
 with st.sidebar:
     st.markdown("""
     <div style='padding:16px 0 24px 0;'>
-        <div style='font-family:"Syne",sans-serif;font-size:1rem;
+        <div style='font-family:"IBM Plex Mono",monospace;font-size:1rem;
                     font-weight:700;color:#60A5FA;'>FinDoc</div>
         <div style='font-size:0.65rem;color:#1E3050;margin-top:2px;
-                    font-family:"JetBrains Mono",monospace;'>INTELLIGENCE v2.0</div>
-    </div>
-    <div style='font-family:"JetBrains Mono",monospace;font-size:0.65rem;
-                color:#1E3050;letter-spacing:0.1em;margin-bottom:10px;'>
-        UPLOAD DOCUMENT
+                    font-family:"IBM Plex Mono",monospace;'>INTELLIGENCE v2.0</div>
     </div>
     """, unsafe_allow_html=True)
+
+    # ── DEMO BUTTON ─────────────────────────────────────────
+    st.markdown("""
+    <div style='font-family:"IBM Plex Mono",monospace;font-size:0.65rem;
+                color:#1E3050;letter-spacing:0.1em;margin-bottom:10px;'>
+        QUICK DEMO
+    </div>""", unsafe_allow_html=True)
+
+    if st.button("⚡  Load Demo Document", use_container_width=True):
+        with st.spinner("Loading demo..."):
+            import tempfile
+            tmp = tempfile.NamedTemporaryFile(
+                delete=False, suffix='.txt', mode='w', encoding='utf-8'
+            )
+            tmp.write(DEMO_DOC)
+            tmp.close()
+            from rag_pipeline import load_document, chunk_text, build_vector_store
+            text   = load_document(tmp.name)
+            chunks = chunk_text(text)
+            col    = build_vector_store(chunks, "Meridian_Capital_2023")
+            st.session_state.collection   = col
+            st.session_state.doc_stats    = {
+                "name"  : "Meridian Capital Annual Report 2023",
+                "words" : len(text.split()),
+                "chunks": len(chunks)
+            }
+            st.session_state.history      = []
+            st.session_state.total_tokens = 0
+            st.session_state.demo_mode    = True
+        st.rerun()
+
+    st.markdown("""
+    <div style='font-size:0.68rem;color:#1E3050;margin:8px 0 20px;
+                font-family:"IBM Plex Mono",monospace;'>
+        Pre-loaded financial report · No upload needed
+    </div>""", unsafe_allow_html=True)
+
+    st.markdown("""
+    <div style='font-family:"IBM Plex Mono",monospace;font-size:0.65rem;
+                color:#1E3050;letter-spacing:0.1em;margin-bottom:10px;'>
+        OR UPLOAD YOUR OWN
+    </div>""", unsafe_allow_html=True)
 
     uploaded = st.file_uploader(
         "Upload", type=["pdf","txt"], label_visibility="collapsed"
@@ -190,53 +295,33 @@ with st.sidebar:
             col    = build_vector_store(chunks, uploaded.name)
             st.session_state.collection   = col
             st.session_state.doc_stats    = {
-                "name":uploaded.name,
-                "words":len(text.split()),
-                "chunks":len(chunks)
+                "name"  : uploaded.name,
+                "words" : len(text.split()),
+                "chunks": len(chunks)
             }
             st.session_state.history      = []
             st.session_state.total_tokens = 0
+            st.session_state.demo_mode    = False
         st.success("Document ready ✓")
 
     if st.session_state.doc_stats:
         ds   = st.session_state.doc_stats
         name = (ds['name'][:22]+"...") if len(ds['name'])>22 else ds['name']
+        demo = st.session_state.get("demo_mode", False)
         st.markdown(f"""
         <div style='margin-top:16px;padding:16px;background:#0D1421;
-                    border:1px solid #1A2438;border-radius:12px;'>
-            <div style='font-size:0.75rem;color:#60A5FA;
-                        font-weight:600;margin-bottom:12px;'>📄 {name}</div>
+                    border:1px solid {"rgba(16,185,129,0.3)" if demo else "#1A2438"};
+                    border-radius:12px;'>
+            <div style='font-size:0.7rem;color:{"#34D399" if demo else "#60A5FA"};
+                        font-weight:600;margin-bottom:6px;'>
+                {"⚡ DEMO MODE" if demo else "📄"} {name}
+            </div>
             <span class='stat-chip'><strong>{ds['words']:,}</strong> words</span>
             <span class='stat-chip'><strong>{ds['chunks']}</strong> chunks</span>
             <span class='stat-chip'>
                 <strong>{st.session_state.total_tokens:,}</strong> tokens
             </span>
         </div>""", unsafe_allow_html=True)
-
-    st.markdown("<div style='margin-top:20px;'></div>", unsafe_allow_html=True)
-
-    with st.expander("⚙️ Config"):
-        st.markdown("""model   : llama-3.3-70b
-    chunks  : 400 words
-    overlap : 40 words
-    top-k   : 3
-    embed   : MiniLM-L6-v2""")
-    with st.expander("🚦 Confidence Tiers"):
-        st.markdown("""
-        🟢 **HIGH** — Strong match. Reliable.
-
-        🟡 **MEDIUM** — Related content found.
-
-        🔴 **LOW** — No context. LLM skipped.
-        Zero hallucination risk.
-        """)
-
-    st.markdown("""
-    <div style='position:fixed;bottom:16px;left:0;width:250px;
-                padding:0 16px;font-size:0.62rem;color:#1E3050;
-                font-family:"JetBrains Mono",monospace;'>
-        Built by Sneha Jaiswal · AI PM Portfolio
-    </div>""", unsafe_allow_html=True)
 
 # ── HERO ─────────────────────────────────────────────────────
 st.markdown("""
@@ -316,7 +401,7 @@ suggestions = [
     "What was the total revenue?",
     "What is the net income margin?",
     "What is the debt position?",
-    "What is the management outlook?",
+    "What are the main risk factors?",
 ]
 c1, c2, c3, c4 = st.columns(4)
 for col, sug in zip([c1,c2,c3,c4], suggestions):
