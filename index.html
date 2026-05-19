@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sneha Jaiswal — Product Manager · AI · FinTech · SaaS</title>
+<meta name="description" content="Product Manager with 6 years shipping AI-powered products across FinTech, Fortune 500 retail, and B2B SaaS.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#080C14;--navy2:#0D1421;--navy3:#111827;
+  --border:#1E293B;--border2:#243449;
+  --blue:#2563EB;--blue2:#3B82F6;--blue-dim:#1E3A5F;
+  --amber:#F59E0B;--green:#10B981;--purple:#8B5CF6;
+  --text1:#F1F5F9;--text2:#94A3B8;--text3:#475569;--text4:#1E293B;
+  --mono:'IBM Plex Mono',monospace;
+  --serif:'Playfair Display',serif;
+  --sans:'Outfit',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--navy);color:var(--text1);font-family:var(--sans);line-height:1.6;overflow-x:hidden}
+
+/* AVAILABILITY BANNER */
+.avail-banner{
+  background:linear-gradient(90deg,rgba(16,185,129,0.1),rgba(37,99,235,0.06));
+  border-bottom:1px solid rgba(16,185,129,0.12);
+  padding:10px 48px;display:flex;align-items:center;
+  justify-content:center;gap:12px;
+  font-size:0.78rem;color:var(--text2);
+  font-family:var(--mono);letter-spacing:0.04em;
+}
+.avail-dot{
+  width:8px;height:8px;background:var(--green);border-radius:50%;flex-shrink:0;
+  box-shadow:0 0 0 3px rgba(16,185,129,0.2);animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+.avail-banner a{color:var(--green);text-decoration:none}
+.avail-banner a:hover{text-decoration:underline}
+
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;height:60px;
+  background:rgba(8,12,20,0.92);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(30,41,59,0.5);
+}
+.nav-logo{font-family:var(--mono);font-size:0.8rem;color:var(--blue2);letter-spacing:0.06em;text-decoration:none}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-size:0.78rem;color:var(--text3);text-decoration:none;font-family:var(--mono);letter-spacing:0.04em;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--blue2)}
+.nav-cta{display:inline-flex;align-items:center;gap:7px;background:var(--blue);color:white;padding:8px 18px;border-radius:8px;font-size:0.78rem;font-weight:600;text-decoration:none;box-shadow:0 4px 14px rgba(37,99,235,0.3);transition:all .2s}
+.nav-cta:hover{background:#1D4ED8;transform:translateY(-1px)}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;padding:80px 48px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 70% 60% at 65% 35%,rgba(37,99,235,0.07) 0%,transparent 65%),radial-gradient(ellipse 50% 40% at 15% 75%,rgba(16,185,129,0.04) 0%,transparent 60%)}
+.hero-grid{position:absolute;inset:0;z-index:0;opacity:.025;background-image:linear-gradient(rgba(255,255,255,.8) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.8) 1px,transparent 1px);background-size:60px 60px}
+.hero-inner{position:relative;z-index:1;max-width:820px}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:0.72rem;font-weight:500;color:var(--blue2);letter-spacing:0.1em;background:rgba(59,130,246,0.07);border:1px solid rgba(59,130,246,0.18);border-radius:20px;padding:6px 16px;margin-bottom:28px}
+.hero-tag-dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+.hero-name{font-family:var(--serif);font-size:clamp(3.2rem,6.5vw,6rem);font-weight:800;color:var(--text1);line-height:1.02;letter-spacing:-.02em;margin-bottom:18px}
+.hero-name em{font-style:italic;color:var(--blue2)}
+.hero-title{font-family:var(--mono);font-size:0.82rem;color:var(--text3);letter-spacing:.1em;margin-bottom:24px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.title-sep{color:var(--blue-dim)}
+.hero-desc{font-size:1.1rem;color:var(--text2);max-width:600px;line-height:1.75;font-weight:300;margin-bottom:40px}
+.hero-desc strong{color:var(--text1);font-weight:500}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:white;padding:13px 28px;border-radius:10px;font-size:0.88rem;font-weight:600;text-decoration:none;box-shadow:0 4px 20px rgba(37,99,235,.35);transition:all .2s}
+.btn-primary:hover{background:#1D4ED8;transform:translateY(-1px)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--text2);padding:13px 24px;border-radius:10px;font-size:0.88rem;font-weight:500;text-decoration:none;border:1px solid var(--border);transition:all .2s}
+.btn-ghost:hover{border-color:var(--blue2);color:var(--blue2)}
+.hero-badges{display:flex;gap:8px;flex-wrap:wrap}
+.hero-badge{font-family:var(--mono);font-size:0.64rem;letter-spacing:.06em;padding:5px 12px;border-radius:6px}
+.badge-blue{color:var(--blue2);background:rgba(59,130,246,.07);border:1px solid rgba(59,130,246,.15)}
+.badge-green{color:var(--green);background:rgba(16,185,129,.07);border:1px solid rgba(16,185,129,.15)}
+.badge-amber{color:var(--amber);background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.15)}
+.badge-purple{color:#A78BFA;background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.15)}
+
+/* STATS */
+.stats-bar{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--navy2);padding:32px 48px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.stat-item{text-align:center}
+.stat-num{font-family:var(--serif);font-size:2.4rem;font-weight:700;color:var(--blue2);line-height:1;margin-bottom:6px}
+.stat-label{font-family:var(--mono);font-size:0.62rem;color:var(--text3);letter-spacing:.1em;text-transform:uppercase}
+
+/* SECTIONS */
+section{padding:88px 48px}
+.max-w{max-width:1080px;margin:0 auto}
+.section-tag{font-family:var(--mono);font-size:0.68rem;color:var(--blue2);letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+.section-title{font-family:var(--serif);font-size:clamp(1.9rem,3vw,2.6rem);font-weight:700;color:var(--text1);margin-bottom:52px;line-height:1.2}
+.section-title span{color:var(--blue2)}
+.section-title em{font-style:italic;color:var(--text2)}
+
+/* WHY ME */
+#why{background:var(--navy2)}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.why-card{background:var(--navy);border:1px solid var(--border);border-radius:16px;padding:28px;position:relative;overflow:hidden;transition:border-color .2s,transform .2s}
+.why-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.why-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.why-card.c1::before{background:linear-gradient(90deg,var(--blue),#60A5FA)}
+.why-card.c2::before{background:linear-gradient(90deg,var(--green),#34D399)}
+.why-card.c3::before{background:linear-gradient(90deg,var(--amber),#FCD34D)}
+.why-num{font-family:var(--serif);font-size:3rem;font-weight:800;line-height:1;margin-bottom:16px;opacity:.12}
+.why-card.c1 .why-num{color:var(--blue2)}
+.why-card.c2 .why-num{color:var(--green)}
+.why-card.c3 .why-num{color:var(--amber)}
+.why-title{font-size:1rem;font-weight:700;color:var(--text1);margin-bottom:12px}
+.why-body{font-size:0.84rem;color:var(--text2);line-height:1.7}
+.why-body strong{color:var(--text1)}
+
+/* ABOUT */
+#about{background:var(--navy)}
+.about-grid{display:grid;grid-template-columns:3fr 2fr;gap:64px;align-items:start}
+.about-text{font-size:0.95rem;color:var(--text2);line-height:1.85}
+.about-text p{margin-bottom:20px}
+.about-text strong{color:var(--text1)}
+.about-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.pill{font-family:var(--mono);font-size:0.68rem;color:var(--blue2);letter-spacing:.04em;background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.15);border-radius:20px;padding:5px 14px}
+.contact-card{background:var(--navy2);border:1px solid var(--border);border-radius:16px;padding:4px 0}
+.contact-row{display:flex;align-items:center;gap:14px;padding:14px 20px;text-decoration:none;border-bottom:1px solid rgba(30,41,59,.6);transition:background .15s}
+.contact-row:last-child{border-bottom:none}
+.contact-row:hover{background:rgba(37,99,235,.04)}
+.contact-icon{width:36px;height:36px;background:var(--navy);border:1px solid var(--border);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:0.9rem;flex-shrink:0}
+.contact-label{font-family:var(--mono);font-size:.58rem;color:var(--text3);letter-spacing:.08em;text-transform:uppercase}
+.contact-value{font-size:.82rem;color:var(--text2);margin-top:1px}
+.contact-row:hover .contact-value{color:var(--blue2)}
+
+/* EXPERIENCE */
+#experience{background:var(--navy2)}
+.exp-timeline{position:relative;padding-left:2px}
+.exp-timeline::before{content:'';position:absolute;left:0;top:8px;bottom:0;width:1px;background:var(--border)}
+.exp-item{position:relative;padding-left:36px;margin-bottom:56px}
+.exp-item::before{content:'';position:absolute;left:-5px;top:8px;width:11px;height:11px;background:var(--blue);border:2px solid var(--navy2);border-radius:50%;box-shadow:0 0 0 4px rgba(37,99,235,.12)}
+.exp-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.exp-date{font-family:var(--mono);font-size:.65rem;color:var(--text3);letter-spacing:.06em}
+.exp-badge{font-family:var(--mono);font-size:.58rem;color:var(--amber);letter-spacing:.06em;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:20px;padding:2px 10px}
+.exp-role{font-size:1.1rem;font-weight:700;color:var(--text1);margin-bottom:3px}
+.exp-company{font-size:.88rem;color:var(--blue2);font-weight:500;margin-bottom:14px}
+.exp-bullets{list-style:none}
+.exp-bullets li{font-size:.86rem;color:var(--text2);line-height:1.65;padding:6px 0 6px 18px;position:relative;border-bottom:1px solid rgba(30,41,59,.4)}
+.exp-bullets li:last-child{border-bottom:none}
+.exp-bullets li::before{content:'→';position:absolute;left:0;color:var(--blue2);font-size:.76rem;margin-top:1px}
+.exp-bullets strong{color:var(--text1)}
+.exp-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.exp-tag{font-family:var(--mono);font-size:.6rem;color:var(--text3);background:var(--navy);border:1px solid var(--border);border-radius:5px;padding:3px 9px}
+
+/* PROJECTS */
+#projects{background:var(--navy)}
+.projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:22px}
+.project-card{background:var(--navy2);border:1px solid var(--border);border-radius:16px;padding:28px;display:flex;flex-direction:column;position:relative;overflow:hidden;transition:border-color .2s,transform .2s}
+.project-card:hover{border-color:var(--border2);transform:translateY(-3px)}
+.project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.project-card.blue::before{background:linear-gradient(90deg,var(--blue),#60A5FA)}
+.project-card.green::before{background:linear-gradient(90deg,var(--green),#34D399)}
+.project-icon{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:18px}
+.project-icon.blue{background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.2)}
+.project-icon.green{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2)}
+.project-label{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.project-label.blue{color:var(--blue2)}
+.project-label.green{color:var(--green)}
+.project-title{font-size:1.15rem;font-weight:700;color:var(--text1);margin-bottom:12px}
+.project-desc{font-size:.84rem;color:var(--text2);line-height:1.7;margin-bottom:18px;flex:1}
+.project-metrics{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:18px}
+.metric-box{background:var(--navy);border:1px solid var(--border);border-radius:9px;padding:11px}
+.metric-val{font-family:var(--mono);font-size:.92rem;font-weight:500;margin-bottom:2px}
+.metric-val.blue{color:var(--blue2)}.metric-val.green{color:var(--green)}
+.metric-key{font-family:var(--mono);font-size:.58rem;color:var(--text3);letter-spacing:.06em;text-transform:uppercase}
+.project-stack{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.stack-tag{font-family:var(--mono);font-size:.6rem;color:var(--text3);background:var(--navy);border:1px solid var(--border);border-radius:5px;padding:3px 9px}
+.project-links{display:flex;gap:9px}
+.link-live{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;color:white;padding:10px;border-radius:8px;font-size:.78rem;font-weight:600;text-decoration:none;transition:filter .2s}
+.link-live.blue{background:var(--blue)}.link-live.green{background:var(--green)}
+.link-live:hover{filter:brightness(1.1)}
+.link-gh{display:flex;align-items:center;justify-content:center;gap:6px;background:var(--navy);color:var(--text2);padding:10px 14px;border-radius:8px;font-size:.78rem;text-decoration:none;border:1px solid var(--border);transition:all .2s}
+.link-gh:hover{border-color:var(--blue2);color:var(--blue2)}
+.mini-projects{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.mini-card{background:var(--navy2);border:1px solid var(--border);border-radius:14px;padding:22px;display:flex;gap:16px;transition:border-color .2s}
+.mini-card:hover{border-color:var(--border2)}
+.mini-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.mini-label{font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+.mini-title{font-size:.92rem;font-weight:600;color:var(--text1);margin-bottom:6px}
+.mini-desc{font-size:.78rem;color:var(--text2);line-height:1.6}
+.mini-tag{display:inline-flex;font-family:var(--mono);font-size:.58rem;color:var(--text3);background:var(--navy);border:1px solid var(--border);border-radius:4px;padding:2px 8px;margin-top:8px;margin-right:5px}
+
+/* SKILLS */
+#skills{background:var(--navy2)}
+.skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.skill-card{background:var(--navy);border:1px solid var(--border);border-radius:14px;padding:22px}
+.skill-card-title{font-family:var(--mono);font-size:.65rem;color:var(--blue2);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.skill-card-title::after{content:'';flex:1;height:1px;background:var(--border)}
+.skill-tags{display:flex;flex-wrap:wrap;gap:7px}
+.skill-tag{font-size:.78rem;color:var(--text2);background:var(--navy2);border:1px solid var(--border);border-radius:7px;padding:5px 11px;transition:all .2s;cursor:default}
+.skill-tag:hover{border-color:var(--blue2);color:var(--text1)}
+.skill-tag.hl{color:var(--blue2);border-color:rgba(59,130,246,.25);background:rgba(59,130,246,.05)}
+
+/* EDUCATION */
+#education{background:var(--navy)}
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:24px}
+.edu-card{background:var(--navy2);border:1px solid var(--border);border-radius:14px;padding:24px;position:relative;overflow:hidden}
+.edu-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--blue)}
+.edu-year{font-family:var(--mono);font-size:.62rem;color:var(--text3);letter-spacing:.08em;margin-bottom:10px}
+.edu-degree{font-size:.98rem;font-weight:700;color:var(--text1);margin-bottom:4px}
+.edu-school{font-size:.86rem;color:var(--blue2);margin-bottom:10px}
+.edu-detail{font-size:.78rem;color:var(--text3);line-height:1.65}
+.cert-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.cert-card{background:var(--navy2);border:1px solid var(--border);border-radius:11px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;transition:border-color .2s}
+.cert-card:hover{border-color:var(--blue-dim)}
+.cert-icon{width:36px;height:36px;background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.15);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.9rem}
+.cert-name{font-size:.72rem;color:var(--text2);line-height:1.4}
+
+/* FOOTER */
+footer{background:var(--navy2);border-top:1px solid var(--border);padding:56px 48px;text-align:center}
+.footer-name{font-family:var(--serif);font-size:2rem;font-weight:700;color:var(--text1);margin-bottom:8px}
+.footer-title{font-family:var(--mono);font-size:.7rem;color:var(--text3);letter-spacing:.12em;margin-bottom:28px}
+.footer-projects{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:28px}
+.footer-project{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:.7rem;padding:7px 16px;border-radius:8px;text-decoration:none;transition:all .2s}
+.footer-project.blue{color:var(--blue2);background:rgba(37,99,235,.06);border:1px solid rgba(37,99,235,.15)}
+.footer-project.green{color:var(--green);background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.15)}
+.footer-project:hover{transform:translateY(-1px)}
+.footer-links{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:28px}
+.footer-link{font-size:.82rem;color:var(--text3);text-decoration:none;transition:color .2s}
+.footer-link:hover{color:var(--blue2)}
+.footer-copy{font-family:var(--mono);font-size:.62rem;color:var(--text4);letter-spacing:.06em}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav{padding:0 20px}.nav-links{display:none}
+  .avail-banner{padding:10px 20px;font-size:.7rem}
+  section,#hero{padding:60px 20px}
+  .stats-bar{grid-template-columns:repeat(2,1fr);padding:24px 20px}
+  .why-grid,.about-grid,.projects-grid,.skills-grid,.edu-grid,.mini-projects{grid-template-columns:1fr}
+  .hero-name{font-size:2.8rem}
+  .cert-grid{grid-template-columns:repeat(2,1fr)}
+  footer{padding:40px 20px}
+}
+</style>
+</head>
+<body>
+
+<!-- AVAILABILITY BANNER -->
+<div class="avail-banner">
+  <span class="avail-dot"></span>
+  Available for AI-powered PM roles &nbsp;·&nbsp; San Francisco, CA &nbsp;·&nbsp;
+  <a href="mailto:snehajai907@gmail.com">snehajai907@gmail.com</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">SJ · PM</a>
+  <ul class="nav-links">
+    <li><a href="#why">Why Me</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+  </ul>
+  <a href="mailto:snehajai907@gmail.com" class="nav-cta">Get In Touch →</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-tag">
+      <span class="hero-tag-dot"></span>
+      Open to Opportunities · San Francisco, CA
+    </div>
+    <h1 class="hero-name">Sneha<br><em>Jaiswal</em></h1>
+    <p class="hero-title">
+      <span>PRODUCT MANAGER</span>
+      <span class="title-sep">·</span>
+      <span>AI-POWERED PRODUCTS</span>
+      <span class="title-sep">·</span>
+      <span>FINTECH</span>
+      <span class="title-sep">·</span>
+      <span>B2B SAAS</span>
+    </p>
+    <p class="hero-desc">
+      6 years shipping <strong>production AI systems</strong> that drive measurable outcomes.
+      From ML demand forecasting for Fortune 500 retail to RAG-powered document intelligence —
+      I bridge the gap between <strong>business needs and AI system design,</strong>
+      owning products from discovery through deployment.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn-primary">View Live Projects ↓</a>
+      <a href="http://linkedin.com/in/sneha-jaiswal07" target="_blank" class="btn-ghost">LinkedIn ↗</a>
+      <a href="https://github.com/snehajai907-sys" target="_blank" class="btn-ghost">GitHub ↗</a>
+    </div>
+    <div class="hero-badges">
+      <span class="hero-badge badge-blue">RAG Architecture</span>
+      <span class="hero-badge badge-green">ML Forecasting</span>
+      <span class="hero-badge badge-amber">FinTech SaaS</span>
+      <span class="hero-badge badge-blue">LLM Evaluation</span>
+      <span class="hero-badge badge-amber">0→1 AI Platforms</span>
+      <span class="hero-badge badge-purple">Human-in-the-Loop</span>
+      <span class="hero-badge badge-green">Fortune 500 Delivery</span>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item reveal">
+    <div class="stat-num" data-target="6">0</div>
+    <div class="stat-label">Years PM Experience</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-num">$1.2M+</div>
+    <div class="stat-label">Cost Savings Delivered</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-num" data-target="25">0</div>
+    <div class="stat-label">Features · 100% On-Time</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-num">−20%</div>
+    <div class="stat-label">Stockouts · Puma Global</div>
+  </div>
+</div>
+
+<!-- WHY ME -->
+<section id="why">
+  <div class="max-w">
+    <div class="section-tag">// Why Hire Me</div>
+    <h2 class="section-title">Three things that make me<br><span>different from 100 other applicants.</span></h2>
+    <div class="why-grid">
+      <div class="why-card c1 reveal">
+        <div class="why-num">01</div>
+        <div class="why-title">I understand AI failure modes — not just features</div>
+        <div class="why-body">Most PMs treat AI as a black box. I've shipped ML pipelines where a bad prediction costs <strong>millions in misallocated inventory</strong> and where a hallucinated financial figure creates regulatory exposure. I design products with <strong>confidence gates, fallback logic, and human review queues</strong> because I know what happens when AI gets it wrong.</div>
+      </div>
+      <div class="why-card c2 reveal">
+        <div class="why-num">02</div>
+        <div class="why-title">Rare domain depth in FinTech + Supply Chain AI</div>
+        <div class="why-body">Most AI PMs have domain expertise or technical AI knowledge — rarely both. I've owned <strong>~$780B AUM portfolio analytics</strong> at Indus Valley Partners and led a <strong>0→1 demand forecasting platform for Puma's global supply chain.</strong> I speak the language of the user, the data scientist, and the C-suite simultaneously.</div>
+      </div>
+      <div class="why-card c3 reveal">
+        <div class="why-num">03</div>
+        <div class="why-title">I build things — not just documents</div>
+        <div class="why-body">Both portfolio projects are <strong>live, deployed, and publicly accessible.</strong> I can discuss chunking strategies, confidence thresholds, and token cost trade-offs because I made those decisions myself. <strong>Every architectural choice is a PM decision I can defend</strong> in a 60-minute technical interview.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="max-w">
+    <div class="section-tag">// About</div>
+    <h2 class="section-title">Platform thinker.<br><span>Decision-maker under uncertainty.</span></h2>
+    <div class="about-grid">
+      <div>
+        <div class="about-text">
+          <p>I sit at the intersection of <strong>financial data integrity and probabilistic AI systems.</strong> I've shipped ML pipelines where a bad prediction costs a Fortune 500 client millions in misallocated inventory — and where a hallucinated financial summary creates regulatory exposure. That forces me to think about AI as <strong>decision infrastructure with real error costs.</strong></p>
+          <p>At <strong>Indus Valley Partners,</strong> I owned pricing automation and portfolio analytics for alternative investment managers overseeing ~$780B AUM — managing a 15-person cross-functional pod and shipping 25+ features at 100% on-time delivery.</p>
+          <p>At <strong>MathCo × Puma,</strong> I led a 0→1 AI demand forecasting platform that reduced stockouts by 20%, improved forecast accuracy by 23%, and drove +17% sales uplift across Puma's global supply chain across 18 months and 3 major releases.</p>
+          <p>I hold an <strong>MBA from IIM Kashipur</strong> and a <strong>B.Tech in Computer Science</strong> — giving me the technical credibility to hold engineers accountable and the strategic framing to present to boards.</p>
+        </div>
+        <div class="about-pills">
+          <span class="pill">RAG & LLM Systems</span>
+          <span class="pill">ML Demand Forecasting</span>
+          <span class="pill">FinTech SaaS</span>
+          <span class="pill">0→1 Delivery</span>
+          <span class="pill">Probabilistic UX</span>
+          <span class="pill">Human-in-the-Loop</span>
+          <span class="pill">C-Suite Stakeholders</span>
+          <span class="pill">Cross-functional Pods</span>
+        </div>
+      </div>
+      <div>
+        <div class="contact-card">
+          <a href="mailto:snehajai907@gmail.com" class="contact-row">
+            <div class="contact-icon">✉️</div>
+            <div><div class="contact-label">Email</div><div class="contact-value">snehajai907@gmail.com</div></div>
+          </a>
+          <a href="tel:+16508805589" class="contact-row">
+            <div class="contact-icon">📞</div>
+            <div><div class="contact-label">Phone</div><div class="contact-value">(650) 880-5589</div></div>
+          </a>
+          <a href="http://linkedin.com/in/sneha-jaiswal07" target="_blank" class="contact-row">
+            <div class="contact-icon">💼</div>
+            <div><div class="contact-label">LinkedIn</div><div class="contact-value">linkedin.com/in/sneha-jaiswal07</div></div>
+          </a>
+          <a href="https://github.com/snehajai907-sys" target="_blank" class="contact-row">
+            <div class="contact-icon">⌨️</div>
+            <div><div class="contact-label">GitHub</div><div class="contact-value">github.com/snehajai907-sys</div></div>
+          </a>
+          <div class="contact-row" style="cursor:default">
+            <div class="contact-icon">📍</div>
+            <div><div class="contact-label">Location</div><div class="contact-value">San Francisco, CA · Open to Remote</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="max-w">
+    <div class="section-tag">// Experience</div>
+    <h2 class="section-title">6 years.<br><span>Three industries. Measurable outcomes.</span></h2>
+    <div class="exp-timeline">
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <span class="exp-date">SEP 2023 — DEC 2024</span>
+          <span class="exp-badge">FINTECH SAAS · ~$780B AUM</span>
+        </div>
+        <div class="exp-role">Product Manager</div>
+        <div class="exp-company">Indus Valley Partners · New York, NY (Remote)</div>
+        <ul class="exp-bullets">
+          <li>Shipped <strong>25+ features at 100% on-time delivery</strong> across pricing automation and portfolio analytics — drove +18% revenue from new enterprise accounts and −70% reduction in manual effort.</li>
+          <li>Presented strategy to C-suite (CFO, CRO); built ROI business cases that <strong>secured additional engineering resources and accelerated a key initiative by 2 quarters.</strong></li>
+          <li>Partnered with engineering on ETL/ELT pipeline requirements to scale from 4→6 clients — evaluated real-time vs. batch trade-offs, <strong>reducing pipeline latency by 35% and manual data handling by 45%.</strong></li>
+          <li>Mentored 2 junior PMs — one independently shipped a feature that <strong>reduced support tickets by 20%;</strong> the other led a C-suite roadmap review within 6 months.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">ETL/ELT</span><span class="exp-tag">Portfolio Analytics</span><span class="exp-tag">C-Suite Stakeholders</span><span class="exp-tag">Agile</span><span class="exp-tag">FinTech SaaS</span><span class="exp-tag">UAT</span>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <span class="exp-date">MAY 2022 — SEP 2023</span>
+          <span class="exp-badge">AI/ML · FORTUNE 500 · 0→1</span>
+        </div>
+        <div class="exp-role">Product Manager</div>
+        <div class="exp-company">MathCo (AI/ML SaaS) × Puma · India</div>
+        <ul class="exp-bullets">
+          <li>Led 0→1 build of an AI demand forecasting and supply optimisation platform — delivered <strong>−20% stockouts, +17% sales uplift, +23% forecast accuracy</strong> across Puma's global supply chain.</li>
+          <li>Identified disconnected demand/supply tools caused 20%+ forecast error; prioritised a unified AI platform — <strong>decision shifted org roadmap by 2 quarters.</strong></li>
+          <li>Tracked anomaly detection at 25% adoption; shipped 3 UX improvements driving adoption to <strong>80% within 2 quarters,</strong> cutting support escalations by 45%.</li>
+          <li>Ran A/B testing on recommendation algorithm → <strong>+32% conversion lift;</strong> reduced planning cycle 8→5 weeks, contributing to +60% client acquisitions and +21% ARR growth.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">0→1 AI Platform</span><span class="exp-tag">Demand Forecasting</span><span class="exp-tag">Supply Chain</span><span class="exp-tag">A/B Testing</span><span class="exp-tag">Power BI</span><span class="exp-tag">ML Requirements</span>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <span class="exp-date">JAN 2018 — AUG 2020</span>
+          <span class="exp-badge">ENTERPRISE ERP</span>
+        </div>
+        <div class="exp-role">Business / Product Analyst</div>
+        <div class="exp-company">Accenture · India</div>
+        <ul class="exp-bullets">
+          <li>Wrote <strong>100+ user stories</strong> across 3 ERP implementations — reduced clarification cycles by 30% and improved first-pass UAT acceptance by 25%.</li>
+          <li>Conducted gap analysis between legacy and proposed ERP — identified integration risks, <strong>preventing scope creep worth 3+ weeks.</strong></li>
+          <li>Contributed to business cases → <strong>$1.2M cost savings;</strong> improved e-commerce performance by 40%, contributing to 30% revenue growth.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">ERP Implementation</span><span class="exp-tag">User Stories</span><span class="exp-tag">Gap Analysis</span><span class="exp-tag">UAT</span><span class="exp-tag">Business Cases</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="max-w">
+    <div class="section-tag">// Portfolio Projects</div>
+    <h2 class="section-title">Built. Deployed. <span>Defensible in any interview.</span></h2>
+
+    <div class="projects-grid">
+      <div class="project-card blue reveal">
+        <div class="project-icon blue">📄</div>
+        <div class="project-label blue">RAG · GENAI · LLM EVALUATION · PROBABILISTIC UX</div>
+        <div class="project-title">FinDoc Intelligence</div>
+        <div class="project-desc">Live RAG-powered Q&A for financial documents. Credit analysts upload any PDF — system retrieves grounded, cited answers with 3-tier confidence scoring. Refuses to answer when context is insufficient rather than hallucinating. Evaluated with a custom LLM-as-Judge harness achieving 100% groundedness.</div>
+        <div class="project-metrics">
+          <div class="metric-box"><div class="metric-val blue">1.00</div><div class="metric-key">Groundedness Score</div></div>
+          <div class="metric-box"><div class="metric-val blue">0 / 5</div><div class="metric-key">Hallucinations</div></div>
+          <div class="metric-box"><div class="metric-val blue">3-Tier</div><div class="metric-key">HITL Confidence Gates</div></div>
+          <div class="metric-box"><div class="metric-val blue">&lt; 3s</div><div class="metric-key">Response Latency</div></div>
+        </div>
+        <div class="project-stack">
+          <span class="stack-tag">Groq · Llama 3.3 70B</span><span class="stack-tag">sentence-transformers</span><span class="stack-tag">numpy RAG</span><span class="stack-tag">Ragas · LLM-as-Judge</span><span class="stack-tag">Streamlit</span>
+        </div>
+        <div class="project-links">
+          <a href="https://findoc-intelligence-hun8fzasjqqlqgbj5kuojw.streamlit.app/" target="_blank" class="link-live blue">🔗 Live Demo</a>
+          <a href="https://github.com/snehajai907-sys/findoc-intelligence" target="_blank" class="link-gh">⌨️ GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-card green reveal">
+        <div class="project-icon green">📈</div>
+        <div class="project-label green">ML FORECASTING · PROBABILISTIC UI · HITL DESIGN</div>
+        <div class="project-title">DemandSense</div>
+        <div class="project-desc">Live probabilistic revenue forecasting platform for retail operations. Trained on 48 months of data using Prophet — generates 6-month forecasts with 80% confidence intervals and a Human-in-the-Loop procurement alert gate. Includes a Model Card documenting every PM architectural trade-off made.</div>
+        <div class="project-metrics">
+          <div class="metric-box"><div class="metric-val green">$113K</div><div class="metric-key">Revenue Protected</div></div>
+          <div class="metric-box"><div class="metric-val green">+7.5%</div><div class="metric-key">Growth Signal</div></div>
+          <div class="metric-box"><div class="metric-val green">48 mo.</div><div class="metric-key">Training Data</div></div>
+          <div class="metric-box"><div class="metric-val green">80% CI</div><div class="metric-key">Confidence Interval</div></div>
+        </div>
+        <div class="project-stack">
+          <span class="stack-tag">Prophet</span><span class="stack-tag">LightGBM</span><span class="stack-tag">Plotly</span><span class="stack-tag">Evidently AI</span><span class="stack-tag">Streamlit</span>
+        </div>
+        <div class="project-links">
+          <a href="https://demandsense-aedfuh5zkswmzaprmyupce.streamlit.app/" target="_blank" class="link-live green">🔗 Live Demo</a>
+          <a href="https://github.com/snehajai907-sys/demandsense" target="_blank" class="link-gh">⌨️ GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin:22px 0 14px">
+      <div class="section-tag">// Independent Builds · 2025</div>
+    </div>
+    <div class="mini-projects">
+      <div class="mini-card reveal">
+        <div class="mini-icon" style="background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);">🤖</div>
+        <div>
+          <div class="mini-label" style="color:var(--amber)">AGENTIC WORKFLOW</div>
+          <div class="mini-title">AI Workflow Automation Agent</div>
+          <div class="mini-desc">Built an agentic automation system using Langflow and NVIDIA NIM — reduced manual task execution time by 40% via automated prompt chaining and multi-step workflow orchestration. Improved response accuracy by 30%.</div>
+          <span class="mini-tag">Langflow</span><span class="mini-tag">NVIDIA NIM</span><span class="mini-tag">LLM APIs</span>
+        </div>
+      </div>
+      <div class="mini-card reveal">
+        <div class="mini-icon" style="background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.2);">✈️</div>
+        <div>
+          <div class="mini-label" style="color:#A78BFA">AI PRODUCT PROTOTYPE</div>
+          <div class="mini-title">AI-Powered Travel Planning App</div>
+          <div class="mini-desc">Designed an AI-powered travel planning prototype generating personalised itineraries and budget recommendations — reduced design iteration time by 35% using rapid prototyping in Lovable.</div>
+          <span class="mini-tag">Lovable</span><span class="mini-tag">AI APIs</span><span class="mini-tag">UI/UX</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="max-w">
+    <div class="section-tag">// Skills</div>
+    <h2 class="section-title">Full-stack PM.<br><span>Business layer to inference layer.</span></h2>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-card-title">AI / ML & GenAI</div>
+        <div class="skill-tags">
+          <span class="skill-tag hl">RAG Architecture</span><span class="skill-tag hl">LLM Evaluation (Ragas)</span><span class="skill-tag hl">Prompt Engineering</span><span class="skill-tag hl">Human-in-the-Loop Design</span><span class="skill-tag hl">Probabilistic UX</span><span class="skill-tag hl">Demand Forecasting (ML)</span><span class="skill-tag">Groq · Llama 3 · OCI GenAI</span><span class="skill-tag">Langflow · NVIDIA NIM</span><span class="skill-tag">Prophet · LightGBM</span><span class="skill-tag">Confidence Thresholding</span><span class="skill-tag">LLM-as-Judge</span><span class="skill-tag">Model Drift Awareness</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-title">Product Management</div>
+        <div class="skill-tags">
+          <span class="skill-tag hl">0→1 Product Delivery</span><span class="skill-tag hl">PRD / BRD Writing</span><span class="skill-tag hl">Roadmap Planning</span><span class="skill-tag hl">Stakeholder Management</span><span class="skill-tag">Agile / Scrum / Kanban</span><span class="skill-tag">Sprint Planning</span><span class="skill-tag">UAT Planning & Execution</span><span class="skill-tag">A/B Testing</span><span class="skill-tag">KPI / OKR Definition</span><span class="skill-tag">VOC & Customer Discovery</span><span class="skill-tag">GTM Planning</span><span class="skill-tag">Release Management</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-title">Data & Analytics</div>
+        <div class="skill-tags">
+          <span class="skill-tag hl">SQL</span><span class="skill-tag hl">ETL/ELT Pipeline Requirements</span><span class="skill-tag hl">Power BI</span><span class="skill-tag">Tableau</span><span class="skill-tag">Google Analytics</span><span class="skill-tag">A/B Experimentation</span><span class="skill-tag">KPI Reporting</span><span class="skill-tag">Plotly</span><span class="skill-tag">Python (PM-level)</span><span class="skill-tag">Data-Driven Prioritisation</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-title">Tools & Technical</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Jira · Confluence</span><span class="skill-tag">Figma</span><span class="skill-tag">Streamlit</span><span class="skill-tag">GitHub</span><span class="skill-tag">REST APIs</span><span class="skill-tag">AWS · Azure</span><span class="skill-tag">CI/CD</span><span class="skill-tag">Postman</span><span class="skill-tag">N8N</span><span class="skill-tag">Lovable</span><span class="skill-tag">Excel</span><span class="skill-tag">Java Spring Boot</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="max-w">
+    <div class="section-tag">// Education & Certifications</div>
+    <h2 class="section-title">IIM MBA + B.Tech CS.<br><span><em>Always learning.</em></span></h2>
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <div class="edu-year">GRADUATED MAY 2022</div>
+        <div class="edu-degree">MBA — IT, Analytics & Marketing</div>
+        <div class="edu-school">Indian Institute of Management (IIM) Kashipur</div>
+        <div class="edu-detail">India's premier national business school. Focus: Technology strategy, product analytics, financial risk, market segmentation, cross-functional management.<br><br>Internships: GTM strategy (Omnicard · +65% efficiency) · Marketing analytics (Take10Trivia · +20% engagement) · B2B product analytics (PrepLeaf · +25% retention, −15% churn).</div>
+      </div>
+      <div class="edu-card reveal">
+        <div class="edu-year">GRADUATED MAY 2017</div>
+        <div class="edu-degree">B.Tech — Computer Science</div>
+        <div class="edu-school">Banasthali University</div>
+        <div class="edu-detail">Computer science foundation covering data structures, algorithms, software engineering, database systems, and programming. Enables deep collaboration with engineering teams and credible evaluation of technical architecture trade-offs.</div>
+      </div>
+    </div>
+    <div style="margin-top:24px">
+      <div class="section-tag" style="margin-bottom:14px">// Certifications</div>
+      <div class="cert-grid">
+        <div class="cert-card reveal"><div class="cert-icon">🤖</div><div class="cert-name">AI Product Management</div></div>
+        <div class="cert-card reveal"><div class="cert-icon">☁️</div><div class="cert-name">OCI AI Foundation</div></div>
+        <div class="cert-card reveal"><div class="cert-icon">🧠</div><div class="cert-name">OCI Generative AI (LLMs)</div></div>
+        <div class="cert-card reveal"><div class="cert-icon">📊</div><div class="cert-name">Advanced Google Analytics</div></div>
+        <div class="cert-card reveal"><div class="cert-icon">🎯</div><div class="cert-name">Consumer Behaviour</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Sneha Jaiswal</div>
+  <div class="footer-title">PRODUCT MANAGER · AI-POWERED PRODUCTS · SAN FRANCISCO, CA</div>
+  <div class="footer-projects">
+    <a href="https://findoc-intelligence-hun8fzasjqqlqgbj5kuojw.streamlit.app/" target="_blank" class="footer-project blue">📄 FinDoc Intelligence ↗</a>
+    <a href="https://demandsense-aedfuh5zkswmzaprmyupce.streamlit.app/" target="_blank" class="footer-project green">📈 DemandSense ↗</a>
+  </div>
+  <div class="footer-links">
+    <a href="mailto:snehajai907@gmail.com" class="footer-link">snehajai907@gmail.com</a>
+    <a href="tel:+16508805589" class="footer-link">(650) 880-5589</a>
+    <a href="http://linkedin.com/in/sneha-jaiswal07" target="_blank" class="footer-link">LinkedIn</a>
+    <a href="https://github.com/snehajai907-sys" target="_blank" class="footer-link">GitHub</a>
+  </div>
+  <div class="footer-copy">© 2025 Sneha Jaiswal · Product Manager Portfolio</div>
+</footer>
+
+<script>
+const reveals=document.querySelectorAll('.reveal');
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'),i*70)});
+},{threshold:0.08});
+reveals.forEach(el=>obs.observe(el));
+
+const counters=document.querySelectorAll('[data-target]');
+const cObs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const target=+e.target.dataset.target;
+      let count=0;const step=Math.ceil(target/40);
+      const timer=setInterval(()=>{
+        count=Math.min(count+step,target);
+        e.target.textContent=count+'+';
+        if(count>=target){e.target.textContent=target;clearInterval(timer)}
+      },40);
+      cObs.unobserve(e.target);
+    }
+  });
+},{threshold:0.5});
+counters.forEach(c=>cObs.observe(c));
+
+const sections=document.querySelectorAll('section[id]');
+const navLinks=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-80) cur=s.id});
+  navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
+});
+</script>
+</body>
+</html>
